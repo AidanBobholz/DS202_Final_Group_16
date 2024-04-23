@@ -28,6 +28,7 @@ library(readr)
 # Read the CSV file from GitHub
 
 dataset <- read.csv("pcconsp_1_csv.csv")
+CornPrices <- read_excel('C:\\Users\\gavin\\OneDrive\\Documents\\Historic_Corn_Prices.xlsx')
 
 ```
 
