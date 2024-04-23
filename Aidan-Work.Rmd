@@ -80,6 +80,12 @@ ggplot(melted_data, aes(x = Year, y = value , color = variable)) +
 
 ```{R}
 
+head(dataset)
+
+```
+
+```{R}
+
 my_palette <- viridis(22)
 
 # Reshape data into long format
