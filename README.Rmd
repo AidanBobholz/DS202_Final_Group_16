@@ -26,8 +26,8 @@ library(readxl)
 library(readr)
 
 # Read the CSV file from GitHub
-url <- "https://github.com/AidanBobholz/DS202_Final_Group_16/raw/main/pcconsp_1_csv.csv"
-dataset <- read_csv(url, col_names = TRUE)
+
+dataset <- read.csv("pcconsp_1_csv.csv")
 
 ```
 
@@ -39,8 +39,8 @@ str(dataset)
 
 ```{R}
 
-
 summary(dataset)
+
 ```
 
 # Questions:
@@ -59,11 +59,15 @@ my_palette <- viridis(22)
 # Reshape data into long format
 melted_data <- melt(dataset, id.vars = "Year")
 
+
+
 # Create density plot
-ggplot(melted_data, aes(x = Year, y = value, color = variable)) +
+ggplot(melted_data, aes(x = Year, y = value , color = variable)) +
   geom_line()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   scale_color_manual(values = my_palette)
+
+
 
 
 
@@ -86,7 +90,17 @@ ggplot(melted_data, aes(x = variable, y = value)) +
   geom_boxplot()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 
+melted_data_below100 <- melted_data %>% 
+  filter(value <= 100)
 
+ggplot(melted_data_below100, aes(x = variable, y = value)) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+
+ggplot(melted_data_below100, aes(x = Year, y = value , color = variable)) +
+  geom_line()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  scale_color_manual(values = my_palette)
 
 ```
 
