@@ -104,7 +104,78 @@ ggplot(melted_data_below100, aes(x = Year, y = value , color = variable)) +
 
 ```
 
-*In this bar plot we can see that the most valuable product is Milk fat basis by a long shot. *
+```{R}
+
+head(melted_data, 3)
+
+```
+
+```{R}
+
+#Creating catgories based on the variable identifier
+
+categorize <- function(variable_name) {
+  if (grepl("American_Cheese", variable_name, ignore.case = TRUE)) {
+    return("Cheese")
+  } else if (grepl("Other_than_American_Cheese", variable_name, ignore.case = TRUE)) {
+    return("Cheese")
+  } else if (grepl("Cottage_Cheese", variable_name, ignore.case = TRUE)) {
+    return("Cheese")
+  } else if (grepl("Dry_Whole_Milk", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Nonfat_and_Skim_milk_powder", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Dry_Butter_Milk", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Dry_Whey_and_Whey_Protein_Concentrate", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Regular_Ice_Cream", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Low_Fat_Ice_Cream", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Sherbet", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Other_Frozen_Dairy", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Water_And_Juices", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Whole_Condensed_Milk_Canned", variable_name, ignore.case = TRUE)) {
+    return("Evaporated_Condensed_Milk")
+  } else if (grepl("Whole_Condensed_Milk_Bulk", variable_name, ignore.case = TRUE)) {
+    return("Evaporated_Condensed_Milk")
+  } else if (grepl("Skim_Condensed_Milk_Bulk_Canned", variable_name, ignore.case = TRUE)) {
+    return("Evaporated_Condensed_Milk")
+  } else {
+    return("Other")
+  }
+}
+
+
+```
+
+
+```{R}
+
+melted_data$Category <- sapply(melted_data$variable, categorize)
+
+head(melted_data)
+
+```
+
+```{R}
+
+melted_data_categories <- melted_data %>% 
+  filter(melted_data$Category != "Other")
+
+ggplot(melted_data_categories, aes(x = Year, y = value, color = variable)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  facet_wrap(~ Category, scales = "free_y")
+  
+
+
+```
+
 
 
 
