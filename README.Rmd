@@ -28,9 +28,10 @@ library(readr)
 # Read the CSV file from GitHub
 
 dataset <- read.csv("pcconsp_1_csv.csv")
-CornPrices <- read.csv("Historic_Corn_Prices.csv")
+HGP <- read.csv("Feed Grains Yearbook Tables-All Years.csv")
 
 ```
+Introduction
 
 ```{R}
 
@@ -46,6 +47,7 @@ summary(dataset)
 
 # Questions:
 ## What is the current trend of dairy products?
+
 
 ```{R}
 
@@ -67,7 +69,6 @@ ggplot(melted_data, aes(x = Year, y = value , color = variable)) +
   geom_line()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   scale_color_manual(values = my_palette)
-
 
 
 
