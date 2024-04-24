@@ -1,0 +1,5 @@
+
+```{r}
+HGP <- read.csv("Feed Grains Yearbook Tables-All Years.csv")
+```
+
