@@ -1,5 +1,18 @@
+#Gavin Work
 
 ```{r}
+#Loading libraries
+library(ggplot2)
+library(reshape2)
+library(readr)
+
+```
+
+
+
+```{r}
+#Load the commodity dataset
 HGP <- read.csv("Feed Grains Yearbook Tables-All Years.csv")
+
 ```
 
