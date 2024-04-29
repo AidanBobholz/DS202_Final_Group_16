@@ -5,6 +5,7 @@
 library(ggplot2)
 library(reshape2)
 library(readr)
+library(dplyr)
 
 ```
 
@@ -15,4 +16,25 @@ library(readr)
 HGP <- read.csv("Feed Grains Yearbook Tables-All Years.csv")
 
 ```
+
+```{r}
+str(HGP)
+
+summary(HGP)
+
+head(HGP)
+
+HGP = HGP %>% rename('X' =)
+```
+
+```{r}
+#plotting commodity prices over the years
+ggplot(HGP, aes(x = year, y = ))
+```
+
+
+
+
+
+
 
