@@ -16,4 +16,4 @@ Our main data set comes from the USDA Economic Research Service. It is under the
 
 **What is the most popularly consumed dairy product?**
 
-![Fluid beverage milk is by far the most consumed dairy product in this data set.](sales_counts.jpeg){width="2100"}
+![Fluid beverage milk is by far the most consumed dairy product in this data set.](sales_counts.jpeg)
