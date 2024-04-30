@@ -40,7 +40,7 @@ dataset <- read.csv("pcconsp_1_csv.csv")
 ### Variables
 
 -   Year: The year in which the data point was collected.
--   Fluid_Beverage_Milk: The amount of milk as a beverage consumed in the U.S. per capita.
+-   Fluid_Beverage_Milk: Includes the milk-content weight of beverage milks: whole, reduced fat, low fat, skim, flavored, buttermilk, eggnog, and miscellaneous.
 -   American_Cheese: The amount of American cheese consumed in the U.S. per capita.
 -   Other_than_American_Cheese: The amount of cheese other than American cheese consumed in the U.S. per capita.
 -   Cottage_Cheese: The amount of Cottage cheese consumed in the U.S. per capita.
@@ -66,7 +66,7 @@ dataset <- read.csv("pcconsp_1_csv.csv")
 
 #### What is the most consumed dairy commodity?
 
-![](sales_counts.jpeg){width="632"}
+![](sales_counts.jpeg)
 
 The most consumed dairy commodity is Beverage milk by far per capita in the United States.
 
