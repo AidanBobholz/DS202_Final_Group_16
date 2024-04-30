@@ -1,0 +1,55 @@
+#Gavin Work
+
+```{r}
+#Loading libraries
+library(ggplot2)
+library(reshape2)
+library(readr)
+library(dplyr)
+
+```
+
+
+
+```{r}
+#Load the commodity dataset
+HGP <- read.csv("Feed Grains Yearbook Tables-All Years.csv")
+
+```
+
+```{r}
+str(HGP)
+
+summary(HGP)
+
+head(HGP)
+
+NewNames <- c("Commodity","Year","Planted.Acres","Harvested.Acres","Total.Production","Yield","Farm.Price","1","2")
+
+names(HGP) <- NewNames
+
+```
+```{r}
+#Removing  unnecessary information
+
+HGP = subset(HGP, select = -c(7,8,9) )
+
+HGP$Year <- gsub("/.*", "", HGP$Year)
+
+HGP = filter(HGP, Year > 1974)
+
+HGP = filter(HGP, Commodity == 'Corn')
+```
+
+
+```{r}
+#plotting commodity prices over the years
+ggplot(HGP, aes(x = Year, y = Harvested.Acres))
+```
+
+
+
+
+
+
+
