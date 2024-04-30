@@ -9,23 +9,29 @@ The goal of this project is to explore data sets around the Dairy Industry to be
 
 To follow this goal we will explore further into these questions:
 
- 1. 
+ 1. What is the most consumed dairy commodity?
  
- 2. 
+ 2. What are the trends in consumption of dairy products?
  
- 3. 
+ 3. Does corn production trends follow the trends of dairy consumption?
  
- 4. 
+ 4. Does the sale price of Alfalfa production effect dairy consumption?
  
- 5. 
+ 5. How does Average price paid for milk effect dairy consumption?
  
- 6. 
+ 6. Does milk cow costs have an effect on dairy consumption?
  
 ## Data
  
 ### Structure
 
 The link to our datasets can be found at <https://www.ers.usda.gov/data-products/dairy-data.aspx>. We are using the "Dairy products: Per capita consumption, United States (Annual)" as our major dataset and will have additional datasets added to compare trends in; corn production, milk alternative commodities, and the Annual milk production and factors affecting supply (Annual). 
+
+
+
+
+
+
 
 ### Cleaning
 
@@ -37,10 +43,29 @@ The link to our datasets can be found at <https://www.ers.usda.gov/data-products
 
 ## Results
 
-#### Question 1
+#### What is the most consumed dairy commodity?
 
-fill in reply
+Reply #1
 
+#### What are the trends in consumption of dairy products?
+
+Reply #2
+
+#### Does corn production trends follow the trends of dairy consumption?
+
+Reply #3
+
+#### Does the sale price of Alfalfa production effect dairy consumption?
+
+Reply #4
+
+#### How does Average price paid for milk effect dairy consumption?
+
+Reply #5
+
+#### Does milk cow costs have an effect on dairy consumption?
+
+Reply #6
 
 ## Conclusion
 
@@ -161,7 +186,7 @@ ggplot(melted_data_below100, aes(x = Year, y = value , color = variable)) +
 
 ```
 
-```{R}
+```R
 
 head(melted_data, 3)
 
