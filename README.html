@@ -393,13 +393,61 @@ the Annual milk production and factors affecting supply (Annual).</p>
 </div>
 <div id="cleaning" class="section level3">
 <h3>Cleaning</h3>
-<p><strong>Steps of cleaning the dataset to be included at a later point
-here</strong></p>
+<p>First in cleaning the data frames we needed to manual format the
+source datasheets. The USDA had formatted the datasheets in a way that
+tidyverse would have a harder time getting them formatted to use than it
+would take for us to manual edit them. In editing them we formatted it
+so that there was column headers with descriptive names of their values.
+This was done for all three datasheets used.</p>
+<p>After this manual cleaning of the data frames we had then imported
+them into our Rmarkdown file,</p>
+<pre class="r"><code>
+dataset &lt;- read.csv(&quot;pcconsp_1_csv.csv&quot;)
+</code></pre>
 </div>
 <div id="variables" class="section level3">
 <h3>Variables</h3>
 <ul>
-<li>X: Definition of variable</li>
+<li>Year: The year in which the data point was collected.</li>
+<li>Fluid_Beverage_Milk: The amount of milk as a beverage consumed in
+the U.S. per capita.</li>
+<li>American_Cheese: The amount of American cheese consumed in the U.S.
+per capita.</li>
+<li>Other_than_American_Cheese: The amount of cheese other than American
+cheese consumed in the U.S. per capita.</li>
+<li>Cottage_Cheese: The amount of Cottage cheese consumed in the U.S.
+per capita.</li>
+<li>Butter: The amount of butter consumed in the U.S. per capita.</li>
+<li>Dry_Whole_Milk: The amount of Dry_Whole_Milk consumed in the U.S.
+per capita.</li>
+<li>Nonfat_and_Skim_milk_powder: The amount of
+Nonfat_and_Skim_milk_powder consumed in the U.S. per capita.</li>
+<li>Dry_Butter_Milk: The amount of Dry_Butter_Milk consumed in the U.S.
+per capita.</li>
+<li>Dry_Whey_and_Whey_Protein_Concentrate: The amount of
+Dry_Whey_and_Whey_Protein_Concentrate consumed in the U.S. per
+capita.</li>
+<li>Regular_Ice_Cream: The amount of Regular_Ice_Cream consumed in the
+U.S. per capita.</li>
+<li>Low_Fat_Ice_Cream: The amount of Low_Fat_Ice_Cream consumed in the
+U.S. per capita.</li>
+<li>Frozen_Yougurt (is NA needs removed)</li>
+<li>Sherbet: The amount of Sherbet consumed in the U.S. per capita.</li>
+<li>Other_Frozen_Dairy: The amount of Other_Frozen_Dairy consumed in the
+U.S. per capita.</li>
+<li>Water_And_Juices: The amount of Water_And_Juices consumed in the
+U.S. per capita.</li>
+<li>Yougurt_Other_Than_Frozen: The amount of Yougurt_Other_Than_Frozen
+consumed in the U.S. per capita.</li>
+<li>Whole_Condensed_Milk_Canned: The amount of
+Whole_Condensed_Milk_Canned consumed in the U.S. per capita.</li>
+<li>Whole_Condensed_Milk_Bulk: The amount of Whole_Condensed_Milk_Bulk
+consumed in the U.S. per capita.</li>
+<li>Skim_Condensed_Milk_Bulk_Canned: The amount of
+Skim_Condensed_Milk_Bulk_Canned consumed in the U.S. per capita.</li>
+<li>Milk_fat_basis: The amount of Milk_fat_basis consumed in the U.S.
+per capita.</li>
+<li>Skim_solids_basis (Is NA needs removed)</li>
 </ul>
 </div>
 </div>
@@ -435,143 +483,6 @@ consumption?</h4>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <p>In the conculusion…</p>
-</div>
-</div>
-<div id="this-is-all-extra-to-be-added-in-or-deleted" class="section level1">
-<h1>This is all extra to be added in or deleted</h1>
-<p>```{R, include = FALSE}</p>
-</div>
-<div id="load-the-readxl-package" class="section level1">
-<h1>Load the readxl package</h1>
-<p>library(tidyverse) library(readxl)</p>
-<p>library(readr)</p>
-</div>
-<div id="read-the-csv-file-from-github" class="section level1">
-<h1>Read the CSV file from GitHub</h1>
-<p>dataset &lt;- read.csv(“pcconsp_1_csv.csv”)</p>
-<pre><code>
-```{R}
-
-str(dataset)
-</code></pre>
-<p>```{R}</p>
-<p>summary(dataset)</p>
-<pre><code>
-# Questions:
-## What is the current trend of dairy products?
-
-```{R}
-
-# Load necessary libraries
-library(ggplot2)
-library(reshape2)
-library(viridis)
-
-
-my_palette &lt;- viridis(22)
-
-# Reshape data into long format
-melted_data &lt;- melt(dataset, id.vars = &quot;Year&quot;)
-
-
-
-# Create density plot
-ggplot(melted_data, aes(x = Year, y = value , color = variable)) +
-  geom_line()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  scale_color_manual(values = my_palette)
-
-
-
-
-</code></pre>
-<p><em>This visual will be in works of improvements but as a start helps
-show the major variables in this dataset. Also we can find that the
-value of fluid beverage milk has been on a constant decline. By working
-on this visual further we may see even more trends with dairy
-products.</em></p>
-<div id="what-is-the-most-popularly-consumed-dairy-product" class="section level2">
-<h2>What is the most popularly consumed dairy product?</h2>
-<p>```{R}</p>
-<p>head(dataset)</p>
-<pre><code>
-```{R}
-
-my_palette &lt;- viridis(22)
-
-# Reshape data into long format
-melted_data &lt;- melt(dataset, id.vars = &quot;Year&quot;)
-
-melted_data_products &lt;- melted_data %&gt;%
-  filter(variable != &quot;Milk_fat_basis&quot;, variable != &quot;Skim_solids_basis&quot;)
-
-# Create density plot
-ggplot(melted_data_products, aes(x = variable, y = value)) +
-  geom_boxplot()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-
-
-melted_data_below100 &lt;- melted_data %&gt;% 
-  filter(value &lt;= 100)
-
-ggplot(melted_data_below100, aes(x = variable, y = value)) +
-  geom_boxplot()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-
-ggplot(melted_data_below100, aes(x = Year, y = value , color = variable)) +
-  geom_line()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  scale_color_manual(values = my_palette)
-</code></pre>
-<pre class="r"><code>
-head(melted_data, 3)
-</code></pre>
-<p>```{R}</p>
-<p>#Creating catgories based on the variable identifier</p>
-<p>categorize &lt;- function(variable_name) { if
-(grepl(“American_Cheese”, variable_name, ignore.case = TRUE)) {
-return(“Cheese”) } else if (grepl(“Other_than_American_Cheese”,
-variable_name, ignore.case = TRUE)) { return(“Cheese”) } else if
-(grepl(“Cottage_Cheese”, variable_name, ignore.case = TRUE)) {
-return(“Cheese”) } else if (grepl(“Dry_Whole_Milk”, variable_name,
-ignore.case = TRUE)) { return(“Dry_products”) } else if
-(grepl(“Nonfat_and_Skim_milk_powder”, variable_name, ignore.case =
-TRUE)) { return(“Dry_products”) } else if (grepl(“Dry_Butter_Milk”,
-variable_name, ignore.case = TRUE)) { return(“Dry_products”) } else if
-(grepl(“Dry_Whey_and_Whey_Protein_Concentrate”, variable_name,
-ignore.case = TRUE)) { return(“Dry_products”) } else if
-(grepl(“Regular_Ice_Cream”, variable_name, ignore.case = TRUE)) {
-return(“Frozen_products”) } else if (grepl(“Low_Fat_Ice_Cream”,
-variable_name, ignore.case = TRUE)) { return(“Frozen_products”) } else
-if (grepl(“Sherbet”, variable_name, ignore.case = TRUE)) {
-return(“Frozen_products”) } else if (grepl(“Other_Frozen_Dairy”,
-variable_name, ignore.case = TRUE)) { return(“Frozen_products”) } else
-if (grepl(“Water_And_Juices”, variable_name, ignore.case = TRUE)) {
-return(“Frozen_products”) } else if
-(grepl(“Whole_Condensed_Milk_Canned”, variable_name, ignore.case =
-TRUE)) { return(“Evaporated_Condensed_Milk”) } else if
-(grepl(“Whole_Condensed_Milk_Bulk”, variable_name, ignore.case = TRUE))
-{ return(“Evaporated_Condensed_Milk”) } else if
-(grepl(“Skim_Condensed_Milk_Bulk_Canned”, variable_name, ignore.case =
-TRUE)) { return(“Evaporated_Condensed_Milk”) } else { return(“Other”) }
-}</p>
-<pre><code>
-
-```{R}
-
-melted_data$Category &lt;- sapply(melted_data$variable, categorize)
-
-head(melted_data)
-</code></pre>
-<p>```{R}</p>
-<p>melted_data_categories &lt;- melted_data %&gt;%
-filter(melted_data$Category != “Other”)</p>
-<p>ggplot(melted_data_categories, aes(x = Year, y = value, color =
-variable)) + geom_line() + theme(axis.text.x = element_text(angle = 90,
-hjust = 1, vjust = 0.5))+ facet_wrap(~ Category, scales = “free_y”)</p>
-<p>```</p>
-<p><strong>More questions are to come as we continue to go through this
-dataset</strong></p>
 </div>
 </div>
 
