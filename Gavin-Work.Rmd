@@ -39,12 +39,18 @@ HGP$Year <- gsub("/.*", "", HGP$Year)
 HGP = filter(HGP, Year > 1974)
 
 HGP = filter(HGP, Commodity == 'Corn')
+
+HGP$Year <- as.numeric(substring(HGP$Year, 1, 4))
+HGP$Total.Production <- as.numeric(gsub(",", "", HGP$Total.Production))
+
+head(HGP)
 ```
 
 
 ```{r}
 #plotting commodity prices over the years
-ggplot(HGP, aes(x = Year, y = Harvested.Acres))
+ggplot(HGP, aes(x = Year, y = Total.Production))+
+  geom_line()
 ```
 
 

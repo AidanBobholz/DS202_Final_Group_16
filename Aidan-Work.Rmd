@@ -10,12 +10,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Title
+
 ## Dairy Data
 
 # Team Members
+
 ## Aidan Bobholz and Gavin Anderson
 
 # Data
+
 ```{R, include = FALSE}
 
 # Load the readxl package
@@ -43,7 +46,16 @@ summary(dataset)
 
 ```
 
+```{R}
+
+head(dataset)
+
+
+```
+
+
 # Questions:
+
 ## What is the current trend of dairy products?
 
 ```{R}
@@ -74,7 +86,6 @@ ggplot(melted_data, aes(x = Year, y = value , color = variable)) +
 ```
 
 *This visual will be in works of improvements but as a start helps show the major variables in this dataset. Also we can find that the value of fluid beverage milk has been on a constant decline. By working on this visual further we may see even more trends with dairy products.*
-
 
 ## What is the most popularly consumed dairy product?
 
@@ -164,7 +175,6 @@ categorize <- function(variable_name) {
 
 ```
 
-
 ```{R}
 
 melted_data$Category <- sapply(melted_data$variable, categorize)
@@ -188,8 +198,5 @@ ggsave("trends_facet.jpeg", trends)
 
 
 ```
-
-
-
 
 **More questions are to come as we continue to go through this dataset**
