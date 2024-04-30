@@ -53,6 +53,12 @@ ggplot(HGP, aes(x = Year, y = Total.Production))+
   geom_line()
 ```
 
+```{r}
+#Merging datasets
+
+
+
+```
 
 
 
