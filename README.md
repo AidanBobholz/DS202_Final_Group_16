@@ -1,21 +1,68 @@
----
-title: "Dairy Data"
-author: "Aidan Bobholz"
-date: "2024-04-23"
-output: html_document
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# Analysis of trends in Dairy Consumption in the United States
 
-# Title
-## Dairy Data
+#### Aidan Bobholz and Gavin Anderson
 
-# Team Members
-## Aidan Bobholz and Gavin Anderson
+## Introduction
 
-# Data
+The goal of this project is to explore data sets around the Dairy Industry to better understand trends in the usage of dairy commodities. As with most agricultural markets there have been notable events that occur in which cause massive changes in the usage of agricultural commodities. Analysis on this topic can give us as students in agriculture a better insight into the ways in which the dairy market is effected. Our end goal is to identify the major trends in dairy commodity usages and find reasons that may be attributed to the increased or decreased usages.
+
+To follow this goal we will explore further into these questions:
+
+ 1. 
+ 
+ 2. 
+ 
+ 3. 
+ 
+ 4. 
+ 
+ 5. 
+ 
+ 6. 
+ 
+## Data
+ 
+### Structure
+
+The link to our datasets can be found at <https://www.ers.usda.gov/data-products/dairy-data.aspx>. We are using the "Dairy products: Per capita consumption, United States (Annual)" as our major dataset and will have additional datasets added to compare trends in; corn production, milk alternative commodities, and the Annual milk production and factors affecting supply (Annual). 
+
+### Cleaning
+
+**Steps of cleaning the dataset to be included at a later point here**
+
+### Variables
+
+- X: Definition of variable
+
+## Results
+
+#### Question 1
+
+fill in reply
+
+
+## Conclusion
+
+In the conculusion...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# This is all extra to be added in or deleted
+
+
 ```{R, include = FALSE}
 
 # Load the readxl package
