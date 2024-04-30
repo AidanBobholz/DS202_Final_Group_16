@@ -58,10 +58,14 @@ ggplot(HGP, aes(x = Year, y = Total.Production))+
 
 merged <- merge(melted_data, HGP, by = 'Year')
 
-
-
 ```
 
+```{r}
+#Loading in Milk Production Factors
+
+MPF <- read.csv("annualmilkprodfactors.csv")
+
+```
 
 
 
