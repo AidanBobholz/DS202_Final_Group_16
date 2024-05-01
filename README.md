@@ -265,6 +265,8 @@ ggsave("Corn_Production_Frozen.jpeg")
 
 ![](Corn_Production_Frozen.jpeg)
 
+Total corn production does not appear to effect any dairy products in any significant way. Corn production grew slowly and linearly while dairy product consumption was very volatile. There was a few minor dips, the biggest being the farm crisis of the 80's, however these did not seem to effect consumer behavior.
+
 #### Does the sale price of Alfalfa production effect dairy consumption?
 
 ``` r
