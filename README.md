@@ -182,7 +182,9 @@ The last set of cleaning now is to do with the corn production dataset.
 -   Whole_Condensed_Milk_Canned: The amount of Whole_Condensed_Milk_Canned consumed in the U.S. per capita.
 -   Whole_Condensed_Milk_Bulk: The amount of Whole_Condensed_Milk_Bulk consumed in the U.S. per capita.
 -   Skim_Condensed_Milk_Bulk_Canned: The amount of Skim_Condensed_Milk_Bulk_Canned consumed in the U.S. per capita.
--   
+-   Alfalfa.hay.price.received.by.farmers4: The average price of alfalfa hay paid for a farmer by the year.
+-   Average.price.paid.for.milk1: Average price of milk by year in the United States.
+-   Milk_Cow_Price: The average cost of a milk cow in the United States.
 
 ## Results
 
@@ -224,6 +226,8 @@ The price of alfalfa does not appear to effect the consumption of dairy commodit
 
 ![](milk_price_frozen.jpeg)
 
+Milk price and evaporated/ condensed milk appears to have some relations along with milk price and dry products. Milk powder and whey powder appear to have an antagonistic relationship with one another. For the condensed milks they appear to also have an antagonistic relationship. Which this does make sense as for marketing if a product is worth more there is likely less demand for it causing a decrease in the consumption of the product.
+
 #### Does milk cow costs have an effect on dairy consumption?
 
 ![](milk_cow_cheese.jpeg)
@@ -234,6 +238,8 @@ The price of alfalfa does not appear to effect the consumption of dairy commodit
 
 ![](milk_cow_frozen.jpeg)
 
+The price of a milk cow does not appear to me a direct effecting agent on the consumption of dairy commodities. This is likely also due to the fact the price has not significantly change over time and also the supply of milk will not change depending on the price of the calves.
+
 ## Conclusion
 
-In the conculusion...
+Going through this dataset was a fun experience and great for learning how to work through a dataset to solve questions that arise for certain topics. From this analysis we have learned about some relations of external events in agriculture that can either effect or not effect the consumption of dairy products in the United States.
