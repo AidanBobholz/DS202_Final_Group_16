@@ -271,11 +271,28 @@ melted_data_Frozen_products <- melted_data_Frozen_products %>% select(-one_of('C
 #Variable specific dataframe of effect
 
 alfalfa_price <- melted_data_effect %>% 
-  filter(melted_data_effect$variable == "alfalfa_price")
+  filter(melted_data_effect$variable == "Alfalfa.hay.price.received.by.farmers4")
+milk_price <- melted_data_effect %>% 
+  filter(melted_data_effect$variable == "Average.price.paid.for.milk1")
+milk_cow <- melted_data_effect %>% 
+  filter(melted_data_effect$variable == "Milk_Cow_Price")
 
-cheese_alfalfa <- merge(melted_data_cheese, alfalfa_price)
+#Creation of sub dataframes for visualization of relations
 
-head(cheese_alfalfa)
+alfalfa_cheese <- bind_rows(alfalfa_price, melted_data_cheese)
+alfalfa_dry <- bind_rows(alfalfa_price, melted_data_dry_products)
+alfalfa_evaporated <- bind_rows(alfalfa_price, melted_data_Evaporated_Condensed_Milk)
+alfalfa_frozen <- bind_rows(alfalfa_price, melted_data_Frozen_products)
+
+milk_price_cheese <- bind_rows(milk_price, melted_data_cheese)
+milk_price_dry <- bind_rows(milk_price, melted_data_dry_products)
+milk_price_evaporated <- bind_rows(milk_price, melted_data_Evaporated_Condensed_Milk)
+milk_price_frozen <- bind_rows(milk_price, melted_data_Frozen_products)
+
+milk_cow_cheese <- bind_rows(milk_cow, melted_data_cheese)
+milk_cow_dry <- bind_rows(milk_cow, melted_data_dry_products)
+milk_cow_evaporated <- bind_rows(milk_cow, melted_data_Evaporated_Condensed_Milk)
+milk_cow_frozen <- bind_rows(milk_cow, melted_data_Frozen_products)
 
 ```
 

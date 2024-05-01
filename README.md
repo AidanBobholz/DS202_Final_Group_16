@@ -110,8 +110,7 @@ melted_data_effect <- melt(dataset_effect, id.vars = "Year")
 
 This dataset is now ready to be used. We will merge this dataset with the subcatgory sets of the main dataset in these next steps. The subcategories are cheese, dry products, evaporated and condensed milk, and frozen products.
 
-
-```r
+``` r
 
 melted_data_cheese <- melted_data %>% 
   filter(melted_data$Category == "Cheese")
@@ -125,12 +124,46 @@ melted_data_Evaporated_Condensed_Milk <- melted_data %>%
 melted_data_Frozen_products <- melted_data %>% 
   filter(melted_data$Category == "Frozen_products")
 
-
 ```
 
 Now with these dataframes we can then remove the category column from them and then merge them with the effects dataset and create visuals for seeing the comparison of commodity consumption and the variabels being observed from the effects dataset.
 
+```R
 
+#Removal of Category
+melted_data_cheese <- melted_data_cheese %>% select(-one_of('Category'))
+melted_data_dry_products <- melted_data_dry_products %>% select(-one_of('Category'))
+melted_data_Evaporated_Condensed_Milk <- melted_data_Evaporated_Condensed_Milk %>% select(-one_of('Category'))
+melted_data_Frozen_products <- melted_data_Frozen_products %>% select(-one_of('Category'))
+
+#Variable specific dataframe of effect
+
+alfalfa_price <- melted_data_effect %>% 
+  filter(melted_data_effect$variable == "Alfalfa.hay.price.received.by.farmers4")
+milk_price <- melted_data_effect %>% 
+  filter(melted_data_effect$variable == "Average.price.paid.for.milk1")
+milk_cow <- melted_data_effect %>% 
+  filter(melted_data_effect$variable == "Milk_Cow_Price")
+
+#Creation of sub dataframes for visualization of relations
+
+alfalfa_cheese <- bind_rows(alfalfa_price, melted_data_cheese)
+alfalfa_dry <- bind_rows(alfalfa_price, melted_data_dry_products)
+alfalfa_evaporated <- bind_rows(alfalfa_price, melted_data_Evaporated_Condensed_Milk)
+alfalfa_frozen <- bind_rows(alfalfa_price, melted_data_Frozen_products)
+
+milk_price_cheese <- bind_rows(milk_price, melted_data_cheese)
+milk_price_dry <- bind_rows(milk_price, melted_data_dry_products)
+milk_price_evaporated <- bind_rows(milk_price, melted_data_Evaporated_Condensed_Milk)
+milk_price_frozen <- bind_rows(milk_price, melted_data_Frozen_products)
+
+milk_cow_cheese <- bind_rows(milk_cow, melted_data_cheese)
+milk_cow_dry <- bind_rows(milk_cow, melted_data_dry_products)
+milk_cow_evaporated <- bind_rows(milk_cow, melted_data_Evaporated_Condensed_Milk)
+milk_cow_frozen <- bind_rows(milk_cow, melted_data_Frozen_products)
+
+```
+The last set of cleaning now is to do with the corn production dataset.
 
 ### Variables
 
@@ -169,8 +202,6 @@ The most consumed dairy commodity is Beverage milk by far per capita in the Unit
 Overall in trends most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has actually been increasing overtime.
 
 #### Does corn production trends follow the trends of dairy consumption?
-
-Reply #3
 
 #### Does the sale price of Alfalfa production effect dairy consumption?
 
