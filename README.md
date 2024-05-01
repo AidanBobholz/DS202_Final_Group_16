@@ -4,7 +4,7 @@
 
 ## Introduction
 
-The goal of this project is to explore data sets around the Dairy Industry to better understand trends in the usage of dairy commodities. As with most agricultural markets there have been notable events that occur in which cause massive changes in the usage of agricultural commodities. Analysis on this topic can give us as students in agriculture a better insight into the ways in which the dairy market is effected. Our end goal is to identify the major trends in dairy commodity usages and find reasons that may be attributed to the increased or decreased usages.
+This project aims to explore data sets around the Dairy Industry better to understand trends in the usage of dairy commodities. As with most agricultural markets, notable events have occurred that caused massive changes in the usage of agricultural commodities. Analysis of this topic can give us, as students in agriculture, a better insight into how the dairy market is affected. Our end goal is to identify the major trends in dairy commodity usage and find reasons that may be attributed to the increased or decreased usage.
 
 To follow this goal we will explore further into these questions:
 
@@ -24,26 +24,26 @@ To follow this goal we will explore further into these questions:
 
 ### Structure
 
-The link to our datasets can be found at <https://www.ers.usda.gov/data-products/dairy-data.aspx>. We are using the "Dairy products: Per capita consumption, United States (Annual)" as our major dataset and will have additional datasets added to compare trends in; corn production and the Annual milk production and factors affecting supply (Annual).
+The link to our datasets can be found at <https://www.ers.usda.gov/data-products/dairy-data.aspx>. We are using the "Dairy products: Per capita consumption, United States (Annual)" as our primary dataset and will have additional datasets added to compare trends in corn production and the Annual milk production and factors affecting supply (Annual).
 
 ### Cleaning
 
-First in cleaning the data frames we needed to manual format the source datasheets. The USDA had formatted the datasheets in a way that tidyverse would have a harder time getting them formatted to use than it would take for us to manual edit them. In editing them we formatted it so that there was column headers with descriptive names of their values. This was done for all three datasheets used.
+First, we needed to manually format the source datasheets in cleaning the data frames. The USDA had formatted the datasheets so that tidyverse would have a more challenging time getting them formatted to use than it would take for us to edit them manually. In editing them, we formatted them so there were column headers with descriptive names of their values. This process was completed for all three datasheets used.
 
-After this manual cleaning of the data frames we had then imported them into our Rmarkdown file, the first step was to remove all NA instances from the dataset. In this we had removed two columns in the main dataset that conatined NA values along with Milk_fat_basis which was not to significance for data analysis.
+After manually cleaning the data frames, we imported them into our Rmarkdown file; the first step was removing all NA instances from the dataset. In this, we removed two columns in the primary dataset that contained NA values along with the Milk_fat_basis, which was not too significant for data analysis.
 
 ``` r
 dataset <- dataset %>% select(-one_of('Skim_solids_basis ', 'Frozen_Yougurt ', 'Milk_fat_basis '))
 ```
 
-After this step we had melted the dataframe to make it easier to create visuals of the data.
+After this step, we melted the data frame to make creating visuals of the data easier.
 
 ``` r
 
 melted_data <- melt(dataset, id.vars = "Year")
 ```
 
-Melting the data frame creates a dataset with three columns and variables as Year, variable, and value. Doing this helps make it easier to create graphs and other visuals. And goes into the last step which was adding the variable of category which represents the category in which the dairy commodity falls into.
+Melting the data frame creates a dataset with three columns and variables: Year, variable, and value. Doing this helps make it easier to create graphs and other visuals. And goes into the last step was adding the variable of category, which represents the category into which the dairy commodity falls.
 
 ``` r
 
@@ -90,9 +90,9 @@ melted_data$Category <- sapply(melted_data$variable, categorize)
 head(melted_data)
 ```
 
-After following these cleaning steps for the main dataframe we are ready to use the dataset for answering our quesitons.
+After following these cleaning steps for the primary data frame, we can use the dataset to answer our questions.
 
-The next cleaning is for the dataset which has values that may have an efffect on the commodity consumption in the United States.
+The following cleaning is for the dataset, which has values that may affect commodity consumption in the United States.
 
 ``` r
 
@@ -101,14 +101,14 @@ dataset_effect <- subset(dataset_effect, select = c(Year, Alfalfa.hay.price.rece
 dataset_effect$Milk_Cow_Price <- as.numeric(gsub(",", "", dataset_effect$Milk_Cow_Price))
 ```
 
-For this dataset the first step was to get it into containg only the variables of interest for comparison. These variables are Year, Alfalfa price, Average milk price, and Milk Cow price. We also had to convert Milk_Cow_Price into a numeric variable as it was stating that it was a character. Next up is to melt the dataset so it is easier to use.
+For this dataset, the first step was to get it to contain only the variables of interest for comparison. These variables are Year, Alfalfa price, Average milk price, and Milk Cow price. We also had to convert Milk_Cow_Price into a numeric variable as it stated that it was a character. Next up is to melt the dataset so it is easier to use.
 
 ``` r
 
 melted_data_effect <- melt(dataset_effect, id.vars = "Year")
 ```
 
-This dataset is now ready to be used. We will merge this dataset with the subcatgory sets of the main dataset in these next steps. The subcategories are cheese, dry products, evaporated and condensed milk, and frozen products.
+This dataset is now ready to be used. We will merge this dataset with the subcategory sets of the primary dataset in these next steps. The subcategories are cheese, dry products, evaporated and condensed milk, and frozen products.
 
 ``` r
 
@@ -125,7 +125,7 @@ melted_data_Frozen_products <- melted_data %>%
   filter(melted_data$Category == "Frozen_products")
 ```
 
-Now with these dataframes we can then remove the category column from them and then merge them with the effects dataset and create visuals for seeing the comparison of commodity consumption and the variabels being observed from the effects dataset.
+Now with these data frames, we can remove the category column from them, merge them with the effects dataset, and create visuals for comparing commodity consumption and the variables observed from the impact dataset.
 
 ``` r
 
@@ -162,7 +162,40 @@ milk_cow_evaporated <- bind_rows(milk_cow, melted_data_Evaporated_Condensed_Milk
 milk_cow_frozen <- bind_rows(milk_cow, melted_data_Frozen_products)
 ```
 
-The last set of cleaning now is to do with the corn production dataset.
+The last set of cleaning now is the corn production dataset. This dataset was pulled from the USDA database. Initial editing was done in Excel to format to explore in R. The first step for this dataset was to rename the column headers to understand what each variable meant.  
+
+```r
+
+NewNames <- c("variable","Year","Planted.Acres","Harvested.Acres","value","Yield","Farm.Price","1","2")
+
+names(HGP) <- NewNames
+
+```
+
+After this, we began to look at the variables and made sure they were in the correct formatting, i.e., numerical factors were indeed numerical, and dates were formatted correctly.
+
+```r
+
+HGP = subset(HGP, select = -c(3,4,6,7,8,9) )
+
+HGP$Year <- gsub("/.*", "", HGP$Year)
+
+HGP = filter(HGP, Year > 1974)
+
+HGP = filter(HGP, variable == 'Corn')
+
+HGP$Year <- as.numeric(substring(HGP$Year, 1, 4))
+HGP$value <- as.numeric(gsub(",", "", HGP$value))
+
+```
+
+After this reformatting and correcting variables in the dataset, we were ready to merge the dataset with our main dataset to begin getting visuals to help us answer our questions.
+
+```r
+
+Corn.Production = bind_rows(HGP, melted_data)
+
+```
 
 ### Variables
 
@@ -185,6 +218,7 @@ The last set of cleaning now is to do with the corn production dataset.
 -   Alfalfa.hay.price.received.by.farmers4: The average price of alfalfa hay paid for a farmer by the year.
 -   Average.price.paid.for.milk1: Average price of milk by year in the United States.
 -   Milk_Cow_Price: The average cost of a milk cow in the United States.
+-   Corn: The total production in millions of bushels of corn in the United States.
 
 ## Results
 
@@ -200,7 +234,7 @@ ggsave("sales_counts.jpeg")
 
 ![](sales_counts.jpeg)
 
-The most consumed dairy commodity in this data set is "Other than American Cheese" which includes: All cheeses other than American cheese. This makes a lot of sense as when you look at a lot of dairy products in stores many of them revolve around cheese. Some examples I think of are even simple as shredded cheese and even cheese its.
+The most consumed dairy commodity in this data set is "Other than American Cheese" which includes: All cheeses other than American cheese. This makes a lot of sense as when you look at a lot of dairy products in stores many of them revolve around cheese. Some examples I think of are as simple as shredded cheese and cheese its.
 
 #### What are the trends in consumption of dairy products?
 
@@ -215,7 +249,7 @@ ggsave("trends_facet.jpeg")
 
 ![](trends_facet.jpeg)
 
-Overall in trends most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has actually been increasing overtime. Which again had showed up in the most consumed product. Also t take into account is in the recent 10 years dairy alternative products have gained popularity, though it is harder to do so for the cheeses, which can also account for the current trend of decreased consumption for the three other categories.
+Overall, most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has been increasing overtime. Which again had showed up in the most consumed product. Also t take into account is in the recent 10 years dairy alternative products have gained popularity. However, it is harder to do so for the cheeses, which can also account for decreased consumption for the three other categories.
 
 #### Does corn production trends follow the trends of dairy consumption?
 
@@ -300,9 +334,9 @@ ggsave("alfalfa_frozen.jpeg")
 
 ![](alfalfa_evaporated.jpeg)
 
-#### ![](alfalfa_frozen.jpeg)
+![](alfalfa_frozen.jpeg)
 
-The price of alfalfa does not appear to effect the consumption of dairy commodities. In most cases the commodity consumption and alfalfa price do do not follow the same curve, though for cheeses there does appear to be the same grow for the main cheeses and a decay with cottage cheese.
+The price of alfalfa does not appear to affect dairy commodities' consumption. In most cases the commodity consumption and alfalfa price do do not follow the same curve, though for cheeses there does appear to be the same grow for the main cheeses and a decay with cottage cheese.
 
 #### How does Average price paid for milk effect dairy consumption?
 
@@ -332,7 +366,7 @@ ggplot(milk_price_frozen, aes(x = Year, y = log(value) , color = variable)) +
   labs(title = "Relation of Milk price and Frozen products consumption")
 ggsave("milk_price_frozen.jpeg")
 
-``
+```
 
 ![](milk_price_cheese.jpeg)
 
@@ -342,7 +376,7 @@ ggsave("milk_price_frozen.jpeg")
 
 ![](milk_price_frozen.jpeg)
 
-Milk price and evaporated/ condensed milk appears to have some relations along with milk price and dry products. Milk powder and whey powder appear to have an antagonistic relationship with one another. For the condensed milks they appear to also have an antagonistic relationship. Which this does make sense as for marketing if a product is worth more there is likely less demand for it causing a decrease in the consumption of the product.
+Milk price and evaporated/ condensed milk appear to have some relations with milk price and dry products. Milk powder and whey powder appear to have an antagonistic relationship. For the condensed milks they appear to also have an antagonistic relationship. The decrease in these commodities consumption does make sense as if milk prices are increased the cost of  a product is likely to increase causing a decrease in the consumption of the product since people can not buy as much of the product.
 
 #### Does milk cow costs have an effect on dairy consumption?
 
@@ -381,8 +415,10 @@ ggsave("milk_cow_frozen.jpeg")
 
 ![](milk_cow_frozen.jpeg)
 
-The price of a milk cow does not appear to me a direct effecting agent on the consumption of dairy commodities. This is likely also due to the fact the price has not significantly change over time and also the supply of milk will not change depending on the price of the calves.
+The price of a milk cow does not appear to me a direct effecting agent on the consumption of dairy commodities. Milk cow price having no affect is likely also because the price has not significantly changed over time and the milk supply will not change depending on the price of the calves.
 
 ## Conclusion
 
 Going through this dataset was a fun experience and great for learning how to work through a dataset to solve questions that arise for certain topics. From this analysis we have learned about some relations of external events in agriculture that can either effect or not effect the consumption of dairy products in the United States.
+
+Further research can be conducted on this by adding more industry events and markets that may impact the consumption of dairy products. This information is useful for those who are in the agricuture trading markets as they may be able to easier watch the trends of certain products and predict what the demand for dairy commodities may be. Correlation markets can be useful for companies looking to increase their profits and to help with sustainibility in agricuture by reducing food waste of products unsold.
