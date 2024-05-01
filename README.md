@@ -30,12 +30,107 @@ The link to our datasets can be found at <https://www.ers.usda.gov/data-products
 
 First in cleaning the data frames we needed to manual format the source datasheets. The USDA had formatted the datasheets in a way that tidyverse would have a harder time getting them formatted to use than it would take for us to manual edit them. In editing them we formatted it so that there was column headers with descriptive names of their values. This was done for all three datasheets used.
 
-After this manual cleaning of the data frames we had then imported them into our Rmarkdown file,
+After this manual cleaning of the data frames we had then imported them into our Rmarkdown file, the first step was to remove all NA instances from the dataset. In this we had removed two columns in the main dataset that conatined NA values along with Milk_fat_basis which was not to significance for data analysis.
+
+``` r
+dataset <- dataset %>% select(-one_of('Skim_solids_basis ', 'Frozen_Yougurt ', 'Milk_fat_basis '))
+```
+
+After this step we had melted the dataframe to make it easier to create visuals of the data.
 
 ``` r
 
-dataset <- read.csv("pcconsp_1_csv.csv")
+melted_data <- melt(dataset, id.vars = "Year")
 ```
+
+Melting the data frame creates a dataset with three columns and variables as Year, variable, and value. Doing this helps make it easier to create graphs and other visuals. And goes into the last step which was adding the variable of category which represents the category in which the dairy commodity falls into.
+
+``` r
+
+#Creating catgories based on the variable identifier
+
+categorize <- function(variable_name) {
+  if (grepl("American_Cheese", variable_name, ignore.case = TRUE)) {
+    return("Cheese")
+  } else if (grepl("Other_than_American_Cheese", variable_name, ignore.case = TRUE)) {
+    return("Cheese")
+  } else if (grepl("Cottage_Cheese", variable_name, ignore.case = TRUE)) {
+    return("Cheese")
+  } else if (grepl("Dry_Whole_Milk", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Nonfat_and_Skim_milk_powder", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Dry_Butter_Milk", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Dry_Whey_and_Whey_Protein_Concentrate", variable_name, ignore.case = TRUE)) {
+    return("Dry_products")
+  } else if (grepl("Regular_Ice_Cream", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Low_Fat_Ice_Cream", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Sherbet", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Other_Frozen_Dairy", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Water_And_Juices", variable_name, ignore.case = TRUE)) {
+    return("Frozen_products")
+  } else if (grepl("Whole_Condensed_Milk_Canned", variable_name, ignore.case = TRUE)) {
+    return("Evaporated_Condensed_Milk")
+  } else if (grepl("Whole_Condensed_Milk_Bulk", variable_name, ignore.case = TRUE)) {
+    return("Evaporated_Condensed_Milk")
+  } else if (grepl("Skim_Condensed_Milk_Bulk_Canned", variable_name, ignore.case = TRUE)) {
+    return("Evaporated_Condensed_Milk")
+  } else {
+    return("Other")
+  }
+}
+
+melted_data$Category <- sapply(melted_data$variable, categorize)
+
+head(melted_data)
+```
+
+After following these cleaning steps for the main dataframe we are ready to use the dataset for answering our quesitons.
+
+The next cleaning is for the dataset which has values that may have an efffect on the commodity consumption in the United States.
+
+``` r
+
+dataset_effect <- subset(dataset_effect, select = c(Year, Alfalfa.hay.price.received.by.farmers4, Average.price.paid.for.milk1, Milk_Cow_Price))
+
+dataset_effect$Milk_Cow_Price <- as.numeric(gsub(",", "", dataset_effect$Milk_Cow_Price))
+```
+
+For this dataset the first step was to get it into containg only the variables of interest for comparison. These variables are Year, Alfalfa price, Average milk price, and Milk Cow price. We also had to convert Milk_Cow_Price into a numeric variable as it was stating that it was a character. Next up is to melt the dataset so it is easier to use.
+
+``` r
+
+melted_data_effect <- melt(dataset_effect, id.vars = "Year")
+```
+
+This dataset is now ready to be used. We will merge this dataset with the subcatgory sets of the main dataset in these next steps. The subcategories are cheese, dry products, evaporated and condensed milk, and frozen products.
+
+
+```r
+
+melted_data_cheese <- melted_data %>% 
+  filter(melted_data$Category == "Cheese")
+
+melted_data_dry_products <- melted_data %>% 
+  filter(melted_data$Category == "Dry_products")
+
+melted_data_Evaporated_Condensed_Milk <- melted_data %>% 
+  filter(melted_data$Category == "Evaporated_Condensed_Milk")
+
+melted_data_Frozen_products <- melted_data %>% 
+  filter(melted_data$Category == "Frozen_products")
+
+
+```
+
+Now with these dataframes we can then remove the category column from them and then merge them with the effects dataset and create visuals for seeing the comparison of commodity consumption and the variabels being observed from the effects dataset.
+
+
 
 ### Variables
 
@@ -51,7 +146,6 @@ dataset <- read.csv("pcconsp_1_csv.csv")
 -   Dry_Whey_and_Whey_Protein_Concentrate: The amount of Dry_Whey_and_Whey_Protein_Concentrate consumed in the U.S. per capita.
 -   Regular_Ice_Cream: The amount of Regular_Ice_Cream consumed in the U.S. per capita.
 -   Low_Fat_Ice_Cream: The amount of Low_Fat_Ice_Cream consumed in the U.S. per capita.
--   Frozen_Yougurt (is NA needs removed)
 -   Sherbet: The amount of Sherbet consumed in the U.S. per capita.
 -   Other_Frozen_Dairy: The amount of Other_Frozen_Dairy consumed in the U.S. per capita.
 -   Water_And_Juices: The amount of Water_And_Juices consumed in the U.S. per capita.
@@ -59,8 +153,6 @@ dataset <- read.csv("pcconsp_1_csv.csv")
 -   Whole_Condensed_Milk_Canned: The amount of Whole_Condensed_Milk_Canned consumed in the U.S. per capita.
 -   Whole_Condensed_Milk_Bulk: The amount of Whole_Condensed_Milk_Bulk consumed in the U.S. per capita.
 -   Skim_Condensed_Milk_Bulk_Canned: The amount of Skim_Condensed_Milk_Bulk_Canned consumed in the U.S. per capita.
--   Milk_fat_basis: The amount of Milk_fat_basis consumed in the U.S. per capita.
--   Skim_solids_basis (Is NA needs removed)
 
 ## Results
 
