@@ -167,11 +167,9 @@ The last set of cleaning now is to do with the corn production dataset.
 ### Variables
 
 -   Year: The year in which the data point was collected.
--   Fluid_Beverage_Milk: Includes the milk-content weight of beverage milks: whole, reduced fat, low fat, skim, flavored, buttermilk, eggnog, and miscellaneous.
 -   American_Cheese: The amount of American cheese consumed in the U.S. per capita.
 -   Other_than_American_Cheese: The amount of cheese other than American cheese consumed in the U.S. per capita.
 -   Cottage_Cheese: The amount of Cottage cheese consumed in the U.S. per capita.
--   Butter: The amount of butter consumed in the U.S. per capita.
 -   Dry_Whole_Milk: The amount of Dry_Whole_Milk consumed in the U.S. per capita.
 -   Nonfat_and_Skim_milk_powder: The amount of Nonfat_and_Skim_milk_powder consumed in the U.S. per capita.
 -   Dry_Butter_Milk: The amount of Dry_Butter_Milk consumed in the U.S. per capita.
@@ -181,10 +179,10 @@ The last set of cleaning now is to do with the corn production dataset.
 -   Sherbet: The amount of Sherbet consumed in the U.S. per capita.
 -   Other_Frozen_Dairy: The amount of Other_Frozen_Dairy consumed in the U.S. per capita.
 -   Water_And_Juices: The amount of Water_And_Juices consumed in the U.S. per capita.
--   Yougurt_Other_Than_Frozen: The amount of Yougurt_Other_Than_Frozen consumed in the U.S. per capita.
 -   Whole_Condensed_Milk_Canned: The amount of Whole_Condensed_Milk_Canned consumed in the U.S. per capita.
 -   Whole_Condensed_Milk_Bulk: The amount of Whole_Condensed_Milk_Bulk consumed in the U.S. per capita.
 -   Skim_Condensed_Milk_Bulk_Canned: The amount of Skim_Condensed_Milk_Bulk_Canned consumed in the U.S. per capita.
+-   
 
 ## Results
 
@@ -196,9 +194,9 @@ The most consumed dairy commodity in this data set is "Other than American Chees
 
 #### What are the trends in consumption of dairy products?
 
-![](trends_facet.jpeg){width="753"}
+![](trends_facet.jpeg)
 
-Overall in trends most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has actually been increasing overtime. Which again had showed up in the most consumed product.
+Overall in trends most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has actually been increasing overtime. Which again had showed up in the most consumed product. Also t take into account is in the recent 10 years dairy alternative products have gained popularity, though it is harder to do so for the cheeses, which can also account for the current trend of decreased consumption for the three other categories.
 
 #### Does corn production trends follow the trends of dairy consumption?
 
@@ -206,35 +204,35 @@ Reply\*\*
 
 #### Does the sale price of Alfalfa production effect dairy consumption?
 
-![](alfalfa_cheese.jpeg){width="402"}
+![](alfalfa_cheese.jpeg)
 
-![](alfalfa_dry.jpeg){width="401"}
+![](alfalfa_dry.jpeg)
 
-![](alfalfa_evaporated.jpeg){width="399"}
+![](alfalfa_evaporated.jpeg)
 
-#### ![](alfalfa_frozen.jpeg){width="408"}
+#### ![](alfalfa_frozen.jpeg)
 
 The price of alfalfa does not appear to effect the consumption of dairy commodities. In most cases the commodity consumption and alfalfa price do do not follow the same curve, though for cheeses there does appear to be the same grow for the main cheeses and a decay with cottage cheese.
 
 #### How does Average price paid for milk effect dairy consumption?
 
-![](milk_price_cheese.jpeg){width="381"}
+![](milk_price_cheese.jpeg)
 
-![](milk_price_dry.jpeg){width="414"}
+![](milk_price_dry.jpeg)
 
-#### ![](milk_price_evaporated.jpeg){width="427"}
+#### ![](milk_price_evaporated.jpeg)
 
-![](milk_price_frozen.jpeg){width="442"}
+![](milk_price_frozen.jpeg)
 
 #### Does milk cow costs have an effect on dairy consumption?
 
-![](milk_cow_cheese.jpeg){width="430"}
+![](milk_cow_cheese.jpeg)
 
-![](milk_cow_dry.jpeg){width="452"}
+![](milk_cow_dry.jpeg)
 
-![](milk_cow_evaporated.jpeg){width="443"}
+![](milk_cow_evaporated.jpeg)
 
-![](milk_cow_frozen.jpeg){width="475"}
+![](milk_cow_frozen.jpeg)
 
 ## Conclusion
 
