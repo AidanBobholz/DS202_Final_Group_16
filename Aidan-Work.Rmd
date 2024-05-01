@@ -80,7 +80,7 @@ melted_data <- melt(dataset, id.vars = "Year")
 head(melted_data)
 
 # Create density plot
-sales <- ggplot(melted_data_products, aes(x = variable, y = value)) +
+sales <- ggplot(melted_data, aes(x = variable, y = value)) +
   geom_boxplot()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 
@@ -120,7 +120,7 @@ melted_data <- melt(dataset, id.vars = "Year")
 
 
 # Create density plot
-sales <- ggplot(melted_data_products, aes(x = variable, y = value)) +
+sales <- ggplot(melted_data, aes(x = variable, y = value)) +
   geom_boxplot()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 
@@ -199,7 +199,7 @@ head(melted_data)
 
 
 
-trends <- ggplot(melted_data_categories, aes(x = Year, y = value, color = variable)) +
+trends <- ggplot(melted_data, aes(x = Year, y = value, color = variable)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   facet_wrap(~ Category, scales = "free_y")
@@ -294,5 +294,82 @@ milk_cow_dry <- bind_rows(milk_cow, melted_data_dry_products)
 milk_cow_evaporated <- bind_rows(milk_cow, melted_data_Evaporated_Condensed_Milk)
 milk_cow_frozen <- bind_rows(milk_cow, melted_data_Frozen_products)
 
+
 ```
 
+```{R}
+#Graphs of alfalfa and commodity
+
+ggplot(alfalfa_cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Cheese consumption")
+
+ggplot(alfalfa_dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Dry products consumption")
+
+ggplot(alfalfa_evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Evaporated and Condensed milk consumption")
+
+ggplot(alfalfa_frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Frozen products consumption")
+
+
+```
+```{R}
+#Graphs of alfalfa and commodity
+
+ggplot(milk_price_cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Cheese consumption")
+
+ggplot(milk_price_dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Dry products consumption")
+
+ggplot(milk_price_evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Evaporated and Condensed milk consumption")
+
+ggplot(milk_price_frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Frozen products consumption")
+
+
+```
+
+```{R}
+#Graphs of alfalfa and commodity
+
+ggplot(milk_cow_cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Cheese consumption")
+
+ggplot(milk_cow_dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Dry products consumption")
+
+ggplot(milk_cow_evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Evaporated and Condensed milk consumption")
+
+ggplot(milk_cow_frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Frozen products consumption")
+
+
+```
