@@ -190,13 +190,12 @@ The last set of cleaning now is to do with the corn production dataset.
 
 #### What is the most consumed dairy commodity?
 
-```r
+``` r
 
 ggplot(filtered_data, aes(x = variable, y = log(value))) +
   geom_boxplot()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ggsave("sales_counts.jpeg")
-
 ```
 
 ![](sales_counts.jpeg)
@@ -205,14 +204,13 @@ The most consumed dairy commodity in this data set is "Other than American Chees
 
 #### What are the trends in consumption of dairy products?
 
-```r
+``` r
 
 ggplot(filtered_data, aes(x = Year, y = log(value), color = variable)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   facet_wrap(~ Category, scales = "free_y")
 ggsave("trends_facet.jpeg")
-
 ```
 
 ![](trends_facet.jpeg)
@@ -221,11 +219,55 @@ Overall in trends most commodity groups of dairy products have been trending dow
 
 #### Does corn production trends follow the trends of dairy consumption?
 
-Reply\*\*
+```{r}
+#Merging datasets
+
+Corn.Production = bind_rows(HGP, melted_data)
+
+Corn_Production_Cheese <- bind_rows(HGP, melted_data_cheese)
+Corn_Production_Dry <- bind_rows(HGP, melted_data_dry_products)
+Corn_Production_Evaporated <- bind_rows(HGP, melted_data_Evaporated_Condensed_Milk)
+Corn_Production_Frozen <- bind_rows(HGP, melted_data_Frozen_products)
+```
+
+```{r}
+#Creating graphs for Corn Production
+ggplot(Corn_Production_Cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Cheese consumption")
+ggsave("Corn_Production_Cheese.jpeg")
+
+ggplot(Corn_Production_Dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Dry products consumption")
+ggsave("Corn_Production_Dry.jpeg")
+
+ggplot(Corn_Production_Evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Evaporated and Condensed milk consumption")
+ggsave("Corn_Production_Evaporated.jpeg")
+
+ggplot(Corn_Production_Frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Frozen products consumption")
+ggsave("Corn_Production_Frozen.jpeg")
+```
+
+![](Corn_Production_Cheese.jpeg)
+
+![](Corn_Production_Dry.jpeg)
+
+![](Corn_Production_Evaporated.jpeg)
+
+![](Corn_Production_Frozen.jpeg)
 
 #### Does the sale price of Alfalfa production effect dairy consumption?
 
-```r
+``` r
 
 ggplot(alfalfa_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
@@ -250,7 +292,6 @@ ggplot(alfalfa_frozen, aes(x = Year, y = log(value) , color = variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Alfalfa price and Frozen products consumption")
 ggsave("alfalfa_frozen.jpeg")
-
 ```
 
 ![](alfalfa_cheese.jpeg)
@@ -265,7 +306,7 @@ The price of alfalfa does not appear to effect the consumption of dairy commodit
 
 #### How does Average price paid for milk effect dairy consumption?
 
-```r
+``` r
 
 ggplot(milk_price_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
@@ -330,7 +371,6 @@ ggplot(milk_cow_frozen, aes(x = Year, y = log(value) , color = variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk cow price and Frozen products consumption")
 ggsave("milk_cow_frozen.jpeg")
-
 ```
 
 ![](milk_cow_cheese.jpeg)
