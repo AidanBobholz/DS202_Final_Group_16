@@ -29,7 +29,7 @@ summary(HGP)
 
 head(HGP)
 
-NewNames <- c("Commodity","Year","Planted.Acres","Harvested.Acres","Total.Production","Yield","Farm.Price","1","2")
+NewNames <- c("variable","Year","Planted.Acres","Harvested.Acres","value","Yield","Farm.Price","1","2")
 
 names(HGP) <- NewNames
 
@@ -37,16 +37,16 @@ names(HGP) <- NewNames
 ```{r}
 #Removing  unnecessary information
 
-HGP = subset(HGP, select = -c(7,8,9) )
+HGP = subset(HGP, select = -c(3,4,6,7,8,9) )
 
 HGP$Year <- gsub("/.*", "", HGP$Year)
 
 HGP = filter(HGP, Year > 1974)
 
-HGP = filter(HGP, Commodity == 'Corn')
+HGP = filter(HGP, variable == 'Corn')
 
 HGP$Year <- as.numeric(substring(HGP$Year, 1, 4))
-HGP$Total.Production <- as.numeric(gsub(",", "", HGP$Total.Production))
+HGP$value <- as.numeric(gsub(",", "", HGP$value))
 
 head(HGP)
 ```
@@ -54,16 +54,15 @@ head(HGP)
 
 ```{r}
 #plotting commodity prices over the years
-ggplot(HGP, aes(x = Year, y = Total.Production))+
+ggplot(HGP, aes(x = Year, y = value))+
   geom_line()
 ```
 
 ```{r}
 #Merging datasets
 
-merged <- merge(melted_data, HGP, by = 'Year')
+Corn.Production = bind_rows(HGP, melted_data)
 
-head(merged)
 ```
 
 ```{r}
@@ -71,7 +70,6 @@ head(merged)
 
 MPF <- read.csv("annualmilkprodfactors.csv")
 
-great success
 ```
 
 
