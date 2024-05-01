@@ -68,19 +68,35 @@ library(viridis)
 
 my_palette <- viridis(22)
 
+dataset <- dataset %>% select(-one_of('Skim_solids_basis ', 'Frozen_Yougurt ', 'Milk_fat_basis '))
+
+
+
+head(dataset)
+
 # Reshape data into long format
 melted_data <- melt(dataset, id.vars = "Year")
 
-
+head(melted_data)
 
 # Create density plot
-ggplot(melted_data, aes(x = Year, y = value , color = variable)) +
+sales <- ggplot(melted_data_products, aes(x = variable, y = value)) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+
+ggsave("sales_counts.jpeg", sales)
+
+melted_data_below100 <- melted_data %>% 
+  filter(value <= 100)
+
+ggplot(melted_data_below100, aes(x = variable, y = value)) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+
+ggplot(melted_data_below100, aes(x = Year, y = value , color = variable)) +
   geom_line()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   scale_color_manual(values = my_palette)
-
-
-
 
 
 ```
@@ -102,8 +118,6 @@ my_palette <- viridis(22)
 # Reshape data into long format
 melted_data <- melt(dataset, id.vars = "Year")
 
-melted_data_products <- melted_data %>%
-  filter(variable != "Milk_fat_basis", variable != "Skim_solids_basis")
 
 # Create density plot
 sales <- ggplot(melted_data_products, aes(x = variable, y = value)) +
@@ -172,21 +186,18 @@ categorize <- function(variable_name) {
   }
 }
 
-
-```
-
-```{R}
-
 melted_data$Category <- sapply(melted_data$variable, categorize)
 
 head(melted_data)
 
+
 ```
+
+
 
 ```{R}
 
-melted_data_categories <- melted_data %>% 
-  filter(melted_data$Category != "Other")
+
 
 trends <- ggplot(melted_data_categories, aes(x = Year, y = value, color = variable)) +
   geom_line() +
@@ -200,3 +211,71 @@ ggsave("trends_facet.jpeg", trends)
 ```
 
 **More questions are to come as we continue to go through this dataset**
+
+```{R}
+
+dataset_effect <- read.csv("annualmilkprodfactors.csv")
+
+head(dataset_effect)
+
+
+```
+
+```{R}
+
+# Assuming your data frame is named "df"
+dataset_effect <- subset(dataset_effect, select = c(Year, Alfalfa.hay.price.received.by.farmers4, Average.price.paid.for.milk1, Milk_Cow_Price))
+
+dataset_effect$Milk_Cow_Price <- as.numeric(gsub(",", "", dataset_effect$Milk_Cow_Price))
+
+head(dataset_effect)
+
+
+```
+
+```{R}
+
+melted_data_effect <- melt(dataset_effect, id.vars = "Year")
+
+head(melted_data_effect)
+
+
+```
+
+
+```{r}
+
+melted_data_cheese <- melted_data %>% 
+  filter(melted_data$Category == "Cheese")
+
+melted_data_dry_products <- melted_data %>% 
+  filter(melted_data$Category == "Dry_products")
+
+melted_data_Evaporated_Condensed_Milk <- melted_data %>% 
+  filter(melted_data$Category == "Evaporated_Condensed_Milk")
+
+melted_data_Frozen_products <- melted_data %>% 
+  filter(melted_data$Category == "Frozen_products")
+
+
+```
+
+```{R}
+
+#Removal of Category
+melted_data_cheese <- melted_data_cheese %>% select(-one_of('Category'))
+melted_data_dry_products <- melted_data_dry_products %>% select(-one_of('Category'))
+melted_data_Evaporated_Condensed_Milk <- melted_data_Evaporated_Condensed_Milk %>% select(-one_of('Category'))
+melted_data_Frozen_products <- melted_data_Frozen_products %>% select(-one_of('Category'))
+
+#Variable specific dataframe of effect
+
+alfalfa_price <- melted_data_effect %>% 
+  filter(melted_data_effect$variable == "alfalfa_price")
+
+cheese_alfalfa <- merge(melted_data_cheese, alfalfa_price)
+
+head(cheese_alfalfa)
+
+```
+
