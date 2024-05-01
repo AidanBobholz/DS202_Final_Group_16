@@ -192,15 +192,17 @@ The last set of cleaning now is to do with the corn production dataset.
 
 ![](sales_counts.jpeg)
 
-The most consumed dairy commodity is Beverage milk by far per capita in the United States.
+The most consumed dairy commodity in this data set is "Other than American Cheese" which includes: All cheeses other than American cheese. This makes a lot of sense as when you look at a lot of dairy products in stores many of them revolve around cheese. Some examples I think of are even simple as shredded cheese and even cheese its.
 
 #### What are the trends in consumption of dairy products?
 
 ![](trends_facet.jpeg){width="753"}
 
-Overall in trends most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has actually been increasing overtime.
+Overall in trends most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has actually been increasing overtime. Which again had showed up in the most consumed product.
 
 #### Does corn production trends follow the trends of dairy consumption?
+
+Reply\*\*
 
 #### Does the sale price of Alfalfa production effect dairy consumption?
 

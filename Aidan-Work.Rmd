@@ -120,11 +120,7 @@ melted_data <- melt(dataset, id.vars = "Year")
 
 
 # Create density plot
-sales <- ggplot(melted_data, aes(x = variable, y = value)) +
-  geom_boxplot()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 
-ggsave("sales_counts.jpeg", sales)
 
 melted_data_below100 <- melted_data %>% 
   filter(value <= 100)
@@ -214,6 +210,12 @@ ggplot(filtered_data, aes(x = Year, y = log(value), color = variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   facet_wrap(~ Category, scales = "free_y")
 ggsave("trends_facet.jpeg")
+
+
+ggplot(filtered_data, aes(x = variable, y = log(value))) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+ggsave("sales_counts.jpeg")
   
 
 
