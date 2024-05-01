@@ -63,6 +63,7 @@ ggplot(HGP, aes(x = Year, y = Total.Production))+
 
 merged <- merge(melted_data, HGP, by = 'Year')
 
+head(merged)
 ```
 
 ```{r}

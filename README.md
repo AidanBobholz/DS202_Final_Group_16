@@ -190,11 +190,30 @@ The last set of cleaning now is to do with the corn production dataset.
 
 #### What is the most consumed dairy commodity?
 
+```r
+
+ggplot(filtered_data, aes(x = variable, y = log(value))) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+ggsave("sales_counts.jpeg")
+
+```
+
 ![](sales_counts.jpeg)
 
 The most consumed dairy commodity in this data set is "Other than American Cheese" which includes: All cheeses other than American cheese. This makes a lot of sense as when you look at a lot of dairy products in stores many of them revolve around cheese. Some examples I think of are even simple as shredded cheese and even cheese its.
 
 #### What are the trends in consumption of dairy products?
+
+```r
+
+ggplot(filtered_data, aes(x = Year, y = log(value), color = variable)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  facet_wrap(~ Category, scales = "free_y")
+ggsave("trends_facet.jpeg")
+
+```
 
 ![](trends_facet.jpeg)
 
@@ -205,6 +224,34 @@ Overall in trends most commodity groups of dairy products have been trending dow
 Reply\*\*
 
 #### Does the sale price of Alfalfa production effect dairy consumption?
+
+```r
+
+ggplot(alfalfa_cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Cheese consumption")
+ggsave("alfalfa_cheese.jpeg")
+
+ggplot(alfalfa_dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Dry products consumption")
+ggsave("alfalfa_dry.jpeg")
+
+ggplot(alfalfa_evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Evaporated and Condensed milk consumption")
+ggsave("alfalfa_evaporated.jpeg")
+
+ggplot(alfalfa_frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Alfalfa price and Frozen products consumption")
+ggsave("alfalfa_frozen.jpeg")
+
+```
 
 ![](alfalfa_cheese.jpeg)
 
@@ -218,17 +265,73 @@ The price of alfalfa does not appear to effect the consumption of dairy commodit
 
 #### How does Average price paid for milk effect dairy consumption?
 
+```r
+
+ggplot(milk_price_cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Cheese consumption")
+ggsave("milk_price_cheese.jpeg")
+
+ggplot(milk_price_dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Dry products consumption")
+ggsave("milk_price_dry.jpeg")
+
+ggplot(milk_price_evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Evaporated and Condensed milk consumption")
+ggsave("milk_price_evaporated.jpeg")
+
+ggplot(milk_price_frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk price and Frozen products consumption")
+ggsave("milk_price_frozen.jpeg")
+
+``
+
 ![](milk_price_cheese.jpeg)
 
 ![](milk_price_dry.jpeg)
 
-#### ![](milk_price_evaporated.jpeg)
+![](milk_price_evaporated.jpeg)
 
 ![](milk_price_frozen.jpeg)
 
 Milk price and evaporated/ condensed milk appears to have some relations along with milk price and dry products. Milk powder and whey powder appear to have an antagonistic relationship with one another. For the condensed milks they appear to also have an antagonistic relationship. Which this does make sense as for marketing if a product is worth more there is likely less demand for it causing a decrease in the consumption of the product.
 
 #### Does milk cow costs have an effect on dairy consumption?
+
+```r
+
+ggplot(milk_cow_cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Cheese consumption")
+ggsave("milk_cow_cheese.jpeg")
+
+ggplot(milk_cow_dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Dry products consumption")
+ggsave("milk_cow_dry.jpeg")
+
+ggplot(milk_cow_evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Evaporated and Condensed milk consumption")
+ggsave("milk_cow_evaporated.jpeg")
+
+ggplot(milk_cow_frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Milk cow price and Frozen products consumption")
+ggsave("milk_cow_frozen.jpeg")
+
+```
 
 ![](milk_cow_cheese.jpeg)
 
