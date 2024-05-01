@@ -199,12 +199,21 @@ head(melted_data)
 
 
 
-trends <- ggplot(melted_data, aes(x = Year, y = value, color = variable)) +
+ggplot(melted_data, aes(x = Year, y = log(value), color = variable)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   facet_wrap(~ Category, scales = "free_y")
 
-ggsave("trends_facet.jpeg", trends)
+# Filter out the "Other" category
+filtered_data <- melted_data %>%
+  filter(Category != "Other")
+
+# Create the plot
+ggplot(filtered_data, aes(x = Year, y = log(value), color = variable)) +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  facet_wrap(~ Category, scales = "free_y")
+ggsave("trends_facet.jpeg")
   
 
 
@@ -304,21 +313,25 @@ ggplot(alfalfa_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Alfalfa price and Cheese consumption")
+ggsave("alfalfa_cheese.jpeg")
 
 ggplot(alfalfa_dry, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Alfalfa price and Dry products consumption")
+ggsave("alfalfa_dry.jpeg")
 
 ggplot(alfalfa_evaporated, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Alfalfa price and Evaporated and Condensed milk consumption")
+ggsave("alfalfa_evaporated.jpeg")
 
 ggplot(alfalfa_frozen, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Alfalfa price and Frozen products consumption")
+ggsave("alfalfa_frozen.jpeg")
 
 
 ```
@@ -329,21 +342,25 @@ ggplot(milk_price_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk price and Cheese consumption")
+ggsave("milk_price_cheese.jpeg")
 
 ggplot(milk_price_dry, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk price and Dry products consumption")
+ggsave("milk_price_dry.jpeg")
 
 ggplot(milk_price_evaporated, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk price and Evaporated and Condensed milk consumption")
+ggsave("milk_price_evaporated.jpeg")
 
 ggplot(milk_price_frozen, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk price and Frozen products consumption")
+ggsave("milk_price_frozen.jpeg")
 
 
 ```
@@ -355,21 +372,25 @@ ggplot(milk_cow_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk cow price and Cheese consumption")
+ggsave("milk_cow_cheese.jpeg")
 
 ggplot(milk_cow_dry, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk cow price and Dry products consumption")
+ggsave("milk_cow_dry.jpeg")
 
 ggplot(milk_cow_evaporated, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk cow price and Evaporated and Condensed milk consumption")
+ggsave("milk_cow_evaporated.jpeg")
 
 ggplot(milk_cow_frozen, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk cow price and Frozen products consumption")
+ggsave("milk_cow_frozen.jpeg")
 
 
 ```

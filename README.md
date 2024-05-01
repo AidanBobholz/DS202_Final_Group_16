@@ -123,12 +123,11 @@ melted_data_Evaporated_Condensed_Milk <- melted_data %>%
 
 melted_data_Frozen_products <- melted_data %>% 
   filter(melted_data$Category == "Frozen_products")
-
 ```
 
 Now with these dataframes we can then remove the category column from them and then merge them with the effects dataset and create visuals for seeing the comparison of commodity consumption and the variabels being observed from the effects dataset.
 
-```R
+``` r
 
 #Removal of Category
 melted_data_cheese <- melted_data_cheese %>% select(-one_of('Category'))
@@ -161,8 +160,8 @@ milk_cow_cheese <- bind_rows(milk_cow, melted_data_cheese)
 milk_cow_dry <- bind_rows(milk_cow, melted_data_dry_products)
 milk_cow_evaporated <- bind_rows(milk_cow, melted_data_Evaporated_Condensed_Milk)
 milk_cow_frozen <- bind_rows(milk_cow, melted_data_Frozen_products)
-
 ```
+
 The last set of cleaning now is to do with the corn production dataset.
 
 ### Variables
@@ -197,7 +196,7 @@ The most consumed dairy commodity is Beverage milk by far per capita in the Unit
 
 #### What are the trends in consumption of dairy products?
 
-![](trends_facet.jpeg)
+![](trends_facet.jpeg){width="753"}
 
 Overall in trends most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has actually been increasing overtime.
 
@@ -205,15 +204,35 @@ Overall in trends most commodity groups of dairy products have been trending dow
 
 #### Does the sale price of Alfalfa production effect dairy consumption?
 
-Reply #4
+![](alfalfa_cheese.jpeg){width="402"}
+
+![](alfalfa_dry.jpeg){width="401"}
+
+![](alfalfa_evaporated.jpeg){width="399"}
+
+#### ![](alfalfa_frozen.jpeg){width="408"}
+
+The price of alfalfa does not appear to effect the consumption of dairy commodities. In most cases the commodity consumption and alfalfa price do do not follow the same curve, though for cheeses there does appear to be the same grow for the main cheeses and a decay with cottage cheese.
 
 #### How does Average price paid for milk effect dairy consumption?
 
-Reply #5
+![](milk_price_cheese.jpeg){width="381"}
+
+![](milk_price_dry.jpeg){width="414"}
+
+#### ![](milk_price_evaporated.jpeg){width="427"}
+
+![](milk_price_frozen.jpeg){width="442"}
 
 #### Does milk cow costs have an effect on dairy consumption?
 
-Reply #6
+![](milk_cow_cheese.jpeg){width="430"}
+
+![](milk_cow_dry.jpeg){width="452"}
+
+![](milk_cow_evaporated.jpeg){width="443"}
+
+![](milk_cow_frozen.jpeg){width="475"}
 
 ## Conclusion
 
