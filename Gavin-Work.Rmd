@@ -63,7 +63,41 @@ ggplot(HGP, aes(x = Year, y = value))+
 
 Corn.Production = bind_rows(HGP, melted_data)
 
+Corn_Production_Cheese <- bind_rows(HGP, melted_data_cheese)
+Corn_Production_Dry <- bind_rows(HGP, melted_data_dry_products)
+Corn_Production_Evaporated <- bind_rows(HGP, melted_data_Evaporated_Condensed_Milk)
+Corn_Production_Frozen <- bind_rows(HGP, melted_data_Frozen_products)
 ```
+
+
+```{r}
+#Creating graphs for Corn Production
+ggplot(Corn_Production_Cheese, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Cheese consumption")
+ggsave("Corn_Production_Cheese.jpeg")
+
+ggplot(Corn_Production_Dry, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Dry products consumption")
+ggsave("Corn_Production_Dry.jpeg")
+
+ggplot(Corn_Production_Evaporated, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Evaporated and Condensed milk consumption")
+ggsave("Corn_Production_Evaporated.jpeg")
+
+ggplot(Corn_Production_Frozen, aes(x = Year, y = log(value) , color = variable)) +
+  geom_step()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  labs(title = "Relation of Corn Production and Frozen products consumption")
+ggsave("Corn_Production_Frozen.jpeg")
+
+```
+
 
 ```{r}
 #Loading in Milk Production Factors
