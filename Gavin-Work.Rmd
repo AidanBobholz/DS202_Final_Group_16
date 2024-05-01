@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 #Gavin Work
 
 ```{r}
@@ -65,6 +70,7 @@ merged <- merge(melted_data, HGP, by = 'Year')
 
 MPF <- read.csv("annualmilkprodfactors.csv")
 
+great success
 ```
 
 
