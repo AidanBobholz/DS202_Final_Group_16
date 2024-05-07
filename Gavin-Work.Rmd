@@ -45,8 +45,13 @@ HGP = filter(HGP, Year > 1974)
 
 HGP = filter(HGP, variable == 'Corn')
 
+
+
+
 HGP$Year <- as.numeric(substring(HGP$Year, 1, 4))
 HGP$value <- as.numeric(gsub(",", "", HGP$value))
+
+HGP$variable <- ifelse(HGP$variable == "Corn", "_Corn", HGP$variable)
 
 head(HGP)
 ```
@@ -69,31 +74,39 @@ Corn_Production_Evaporated <- bind_rows(HGP, melted_data_Evaporated_Condensed_Mi
 Corn_Production_Frozen <- bind_rows(HGP, melted_data_Frozen_products)
 ```
 
+```{R}
+my_palette <- c("black", "red", "green", "blue", "purple", "orange", "yellow")
+
+```
 
 ```{r}
 #Creating graphs for Corn Production
 ggplot(Corn_Production_Cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Corn Production and Cheese consumption")
+  labs(title = "Relation of Corn Production and Cheese consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("Corn_Production_Cheese.jpeg")
 
 ggplot(Corn_Production_Dry, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Corn Production and Dry products consumption")
+  labs(title = "Relation of Corn Production and Dry products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("Corn_Production_Dry.jpeg")
 
 ggplot(Corn_Production_Evaporated, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Corn Production and Evaporated and Condensed milk consumption")
+  labs(title = "Relation of Corn Production and Evaporated and Condensed milk consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("Corn_Production_Evaporated.jpeg")
 
 ggplot(Corn_Production_Frozen, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Corn Production and Frozen products consumption")
+  labs(title = "Relation of Corn Production and Frozen products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("Corn_Production_Frozen.jpeg")
 
 ```

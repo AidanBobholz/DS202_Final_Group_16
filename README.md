@@ -250,7 +250,7 @@ Overall, most commodity groups of dairy products have been trending down overtim
 
 #### Does corn production trends follow the trends of dairy consumption?
 
-```r
+``` r
 #Merging datasets
 
 Corn.Production = bind_rows(HGP, melted_data)
@@ -261,7 +261,7 @@ Corn_Production_Evaporated <- bind_rows(HGP, melted_data_Evaporated_Condensed_Mi
 Corn_Production_Frozen <- bind_rows(HGP, melted_data_Frozen_products)
 ```
 
-```r
+``` r
 #Creating graphs for Corn Production
 ggplot(Corn_Production_Cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
@@ -419,4 +419,4 @@ The price of a milk cow does not appear to me a direct effecting agent on the co
 
 Going through this dataset was a fun experience and great for learning how to work through a dataset to solve questions that arise for certain topics. From this analysis we have learned about some relations of external events in agriculture that can either effect or not effect the consumption of dairy products in the United States.
 
-Further research can be conducted on this by adding more industry events and markets that may impact the consumption of dairy products. This information is useful for those who are in the agricuture trading markets as they may be able to easier watch the trends of certain products and predict what the demand for dairy commodities may be. Correlation markets can be useful for companies looking to increase their profits and to help with sustainibility in agricuture by reducing food waste of products unsold.
+Further research can be conducted on this by adding more industry events and markets that may impact the consumption of dairy products. This information is useful for those who are in the agriculture trading markets as they may be able to easier watch the trends of certain products and predict what the demand for dairy commodities may be. Correlation markets can be useful for companies looking to increase their profits and to help with sustainability in agriculture by reducing food waste of products unsold.

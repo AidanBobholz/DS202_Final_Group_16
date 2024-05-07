@@ -66,7 +66,8 @@ library(reshape2)
 library(viridis)
 
 
-my_palette <- viridis(22)
+my_palette <- magma(10)
+
 
 dataset <- dataset %>% select(-one_of('Skim_solids_basis ', 'Frozen_Yougurt ', 'Milk_fat_basis '))
 
@@ -214,7 +215,8 @@ ggsave("trenda_facet.jpeg")
 
 ggplot(filtered_data, aes(x = variable, y = log(value))) +
   geom_boxplot()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
+  scale_color_manual(values = my_palette)
 ggsave("sales_counta.jpeg")
   
 
@@ -309,59 +311,73 @@ milk_cow_frozen <- bind_rows(milk_cow, melted_data_Frozen_products)
 ```
 
 ```{R}
+my_palette <- c("black", "red", "green", "blue", "purple", "orange", "yellow")
+
+```
+
+
+```{R}
 #Graphs of alfalfa and commodity
 
 ggplot(alfalfa_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Alfalfa price and Cheese consumption")
+  labs(title = "Relation of Alfalfa price and Cheese consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("alfalfa_cheese.jpeg")
 
 ggplot(alfalfa_dry, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Alfalfa price and Dry products consumption")
+  labs(title = "Relation of Alfalfa price and Dry products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("alfalfa_dry.jpeg")
 
 ggplot(alfalfa_evaporated, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Alfalfa price and Evaporated and Condensed milk consumption")
+  labs(title = "Relation of Alfalfa price and Evaporated and Condensed milk consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("alfalfa_evaporated.jpeg")
 
 ggplot(alfalfa_frozen, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Alfalfa price and Frozen products consumption")
+  labs(title = "Relation of Alfalfa price and Frozen products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("alfalfa_frozen.jpeg")
 
 
 ```
 ```{R}
-#Graphs of alfalfa and commodity
+#Graphs of milk price and commodity
 
 ggplot(milk_price_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk price and Cheese consumption")
+  labs(title = "Relation of Milk price and Cheese consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_price_cheese.jpeg")
 
 ggplot(milk_price_dry, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk price and Dry products consumption")
+  labs(title = "Relation of Milk price and Dry products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_price_dry.jpeg")
 
 ggplot(milk_price_evaporated, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk price and Evaporated and Condensed milk consumption")
+  labs(title = "Relation of Milk price and Evaporated and Condensed milk consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_price_evaporated.jpeg")
 
 ggplot(milk_price_frozen, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk price and Frozen products consumption")
+  labs(title = "Relation of Milk price and Frozen products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_price_frozen.jpeg")
 
 
@@ -373,25 +389,29 @@ ggsave("milk_price_frozen.jpeg")
 ggplot(milk_cow_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk cow price and Cheese consumption")
+  labs(title = "Relation of Milk cow price and Cheese consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_cow_cheese.jpeg")
 
 ggplot(milk_cow_dry, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk cow price and Dry products consumption")
+  labs(title = "Relation of Milk cow price and Dry products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_cow_dry.jpeg")
 
 ggplot(milk_cow_evaporated, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk cow price and Evaporated and Condensed milk consumption")
+  labs(title = "Relation of Milk cow price and Evaporated and Condensed milk consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_cow_evaporated.jpeg")
 
 ggplot(milk_cow_frozen, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
-  labs(title = "Relation of Milk cow price and Frozen products consumption")
+  labs(title = "Relation of Milk cow price and Frozen products consumption")+
+  scale_color_manual(values = my_palette)
 ggsave("milk_cow_frozen.jpeg")
 
 
