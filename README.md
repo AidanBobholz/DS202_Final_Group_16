@@ -300,6 +300,8 @@ Total corn production does not appear to effect any dairy products in any signif
 
 #### Does the sale price of Alfalfa production effect dairy consumption?
 
+Initial background, Alfalfa is a forage legume used in the feed of livestock. The market price of alfalfa may have some importance on the consumption of dairy, as if the alfalfa price is high so will be the cost of milk production.
+
 ``` r
 
 ggplot(alfalfa_cheese, aes(x = Year, y = log(value) , color = variable)) +
