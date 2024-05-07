@@ -209,13 +209,13 @@ ggplot(filtered_data, aes(x = Year, y = log(value), color = variable)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   facet_wrap(~ Category, scales = "free_y")
-ggsave("trends_facet.jpeg")
+ggsave("trenda_facet.jpeg")
 
 
 ggplot(filtered_data, aes(x = variable, y = log(value))) +
   geom_boxplot()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-ggsave("sales_counts.jpeg")
+ggsave("sales_counta.jpeg")
   
 
 

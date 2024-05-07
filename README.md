@@ -162,19 +162,18 @@ milk_cow_evaporated <- bind_rows(milk_cow, melted_data_Evaporated_Condensed_Milk
 milk_cow_frozen <- bind_rows(milk_cow, melted_data_Frozen_products)
 ```
 
-The last set of cleaning now is the corn production dataset. This dataset was pulled from the USDA database. Initial editing was done in Excel to format to explore in R. The first step for this dataset was to rename the column headers to understand what each variable meant.  
+The last set of cleaning now is the corn production dataset. This dataset was pulled from the USDA database. Initial editing was done in Excel to format to explore in R. The first step for this dataset was to rename the column headers to understand what each variable meant.
 
-```r
+``` r
 
 NewNames <- c("variable","Year","Planted.Acres","Harvested.Acres","value","Yield","Farm.Price","1","2")
 
 names(HGP) <- NewNames
-
 ```
 
 After this, we began to look at the variables and made sure they were in the correct formatting, i.e., numerical factors were indeed numerical, and dates were formatted correctly.
 
-```r
+``` r
 
 HGP = subset(HGP, select = -c(3,4,6,7,8,9) )
 
@@ -186,15 +185,13 @@ HGP = filter(HGP, variable == 'Corn')
 
 HGP$Year <- as.numeric(substring(HGP$Year, 1, 4))
 HGP$value <- as.numeric(gsub(",", "", HGP$value))
-
 ```
 
 After this reformatting and correcting variables in the dataset, we were ready to merge the dataset with our main dataset to begin getting visuals to help us answer our questions.
 
-```r
+``` r
 
 Corn.Production = bind_rows(HGP, melted_data)
-
 ```
 
 ### Variables
@@ -232,7 +229,7 @@ ggplot(filtered_data, aes(x = variable, y = log(value))) +
 ggsave("sales_counts.jpeg")
 ```
 
-![](sales_counts.jpeg)
+![](sales_counta.jpeg)
 
 The most consumed dairy commodity in this data set is "Other than American Cheese" which includes: All cheeses other than American cheese. This makes a lot of sense as when you look at a lot of dairy products in stores many of them revolve around cheese. Some examples I think of are as simple as shredded cheese and cheese its.
 
@@ -247,13 +244,13 @@ ggplot(filtered_data, aes(x = Year, y = log(value), color = variable)) +
 ggsave("trends_facet.jpeg")
 ```
 
-![](trends_facet.jpeg)
+![](trenda_facet.jpeg)
 
 Overall, most commodity groups of dairy products have been trending down overtime, while the cheese commodity group has been increasing overtime. Which again had showed up in the most consumed product. Also t take into account is in the recent 10 years dairy alternative products have gained popularity. However, it is harder to do so for the cheeses, which can also account for decreased consumption for the three other categories.
 
 #### Does corn production trends follow the trends of dairy consumption?
 
-```{r}
+```r
 #Merging datasets
 
 Corn.Production = bind_rows(HGP, melted_data)
@@ -264,7 +261,7 @@ Corn_Production_Evaporated <- bind_rows(HGP, melted_data_Evaporated_Condensed_Mi
 Corn_Production_Frozen <- bind_rows(HGP, melted_data_Frozen_products)
 ```
 
-```{r}
+```r
 #Creating graphs for Corn Production
 ggplot(Corn_Production_Cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
@@ -367,7 +364,6 @@ ggplot(milk_price_frozen, aes(x = Year, y = log(value) , color = variable)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))+
   labs(title = "Relation of Milk price and Frozen products consumption")
 ggsave("milk_price_frozen.jpeg")
-
 ```
 
 ![](milk_price_cheese.jpeg)
@@ -378,11 +374,11 @@ ggsave("milk_price_frozen.jpeg")
 
 ![](milk_price_frozen.jpeg)
 
-Milk price and evaporated/ condensed milk appear to have some relations with milk price and dry products. Milk powder and whey powder appear to have an antagonistic relationship. For the condensed milks they appear to also have an antagonistic relationship. The decrease in these commodities consumption does make sense as if milk prices are increased the cost of  a product is likely to increase causing a decrease in the consumption of the product since people can not buy as much of the product.
+Milk price and evaporated/ condensed milk appear to have some relations with milk price and dry products. Milk powder and whey powder appear to have an antagonistic relationship. For the condensed milks they appear to also have an antagonistic relationship. The decrease in these commodities consumption does make sense as if milk prices are increased the cost of a product is likely to increase causing a decrease in the consumption of the product since people can not buy as much of the product.
 
 #### Does milk cow costs have an effect on dairy consumption?
 
-```r
+``` r
 
 ggplot(milk_cow_cheese, aes(x = Year, y = log(value) , color = variable)) +
   geom_step()+
